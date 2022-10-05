@@ -1,12 +1,14 @@
-black~=22.0
-flake8>=3.7.9, <5.0
-ipython>=7.31.1, <8.0
-isort~=5.0
-jupyter~=1.0
-jupyterlab~=3.0
+black==22.1.0 # Used for formatting code with `kedro lint`
+flake8>=3.7.9, <5.0 # Used for linting code with `kedro lint`
+ipython==7.0 # Used for an IPython session with `kedro ipython`
+isort~=5.0 # Used for linting code with `kedro lint`
+jupyter~=1.0 # Used to open a Kedro-session in Jupyter Notebook & Lab
+jupyterlab~=3.0 # Used to open a Kedro-session in Jupyter Lab
 kedro~=0.18.3
-kedro-telemetry~=0.2.0
-nbstripout~=0.4
-pytest-cov~=3.0
-pytest-mock>=1.7.1, <2.0
-pytest~=6.2
+nbstripout~=0.4 # Strips the output of a Jupyter Notebook and writes the outputless version to the original file
+pytest-cov~=3.0 # Produces test coverage reports
+pytest-mock>=1.7.1, <2.0 # Wrapper around the mock package for easier use with pytest
+pytest~=6.2 # Testing framework for Python code
+kedro[pandas.CSVDataSet, pandas.ExcelDataSet, pandas.ParquetDataSet]==0.18.3   # Specify optional Kedro dependencies
+kedro-viz~=5.0                                                                 # Visualise your pipelines
+scikit-learn~=1.0                                                              # For modelling in the data science pipeline
