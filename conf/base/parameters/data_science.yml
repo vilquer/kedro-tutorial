@@ -13,6 +13,50 @@ model_options:
     - crew
     - d_check_complete
     - moon_clearance_complete
+        
     - iata_approved
     - company_rating
     - review_scores_rating
+    
+    - review_scores_comfort
+    - review_scores_amenities
+    - review_scores_trip
+    - review_scores_crew
+    - review_scores_location
+    - review_scores_price
+    - number_of_reviews
+    - reviews_per_month
+    - total_fleet_count
+    
+# Features categóricas    
+    
+    ##- shuttle_location
+    ##- shuttle_type
+    ##- engine_type
+    ##- engine_vendor
+    ##- cancellation_policy
+    ##- company_location
+    
+# Com as 5 primeiras features
+
+  #regressor: LinearRegression # Rˆ2 = 0.456 0.130 seconds.
+  #regressor: RandomForestRegressor # Rˆ2 = 0.624
+  #regressor: xgb.XGBRegressor # Rˆ2 = 0.623
+  #regressor: ltb.LGBMRegressor # Rˆ2 = 0.618
+  #regressor: CatBoostRegressor # Rˆ2 = 0.623
+  
+# Com as 8 primeiras features
+
+  #regressor: LinearRegression # Rˆ2 = 0.462 0.206 seconds.
+  #regressor: RandomForestRegressor # Rˆ2 = 0.797
+  #regressor: xgb.XGBRegressor # Rˆ2 = 0.758
+  #regressor: ltb.LGBMRegressor # Rˆ2 = 0.717
+  #regressor: CatBoostRegressor # Rˆ2 = 0.751
+  
+# Com todas as 17 features numéricas ou booleanas
+  
+  #regressor: LinearRegression # Rˆ2 = 0.503 0.452 seconds.
+  #regressor: RandomForestRegressor # Rˆ2 = 0.996 106.184 seconds.
+  regressor: xgb.XGBRegressor # Rˆ2 = 0.963 13.125 seg.
+  #regressor: ltb.LGBMRegressor # Rˆ2 = 0.898 1.882 seconds.
+  #regressor: CatBoostRegressor # Rˆ2 = 0.963 26.117 seg.

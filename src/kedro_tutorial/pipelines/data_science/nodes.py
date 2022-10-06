@@ -7,9 +7,15 @@ from typing import Dict, Tuple
 
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 
+import xgboost as xgb
+import lightgbm as ltb
+from catboost import Pool, CatBoostRegressor
+
+import time
 
 def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
     """Splits data into features and targets training and test sets.
@@ -28,7 +34,7 @@ def split_data(data: pd.DataFrame, parameters: Dict) -> Tuple:
     return X_train, X_test, y_train, y_test
 
 
-def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> LinearRegression:
+def train_model(X_train: pd.DataFrame, y_train: pd.Series, parameters: Dict) -> LinearRegression:
     """Trains the linear regression model.
 
     Args:
@@ -38,8 +44,22 @@ def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> LinearRegression:
     Returns:
         Trained model.
     """
-    regressor = LinearRegression()
+    regressor = eval(parameters["regressor"])()
+    
+    # get the start time
+    st = time.time()
+    
     regressor.fit(X_train, y_train)
+    
+    # get the end time
+    et = time.time()
+    
+    # get the execution time
+    elapsed_time = et - st
+    
+    logger = logging.getLogger(__name__)
+    logger.info("Training time: %3.3f seconds.", elapsed_time)
+    
     return regressor
 
 
