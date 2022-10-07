@@ -25,6 +25,21 @@ preprocessed_shuttles:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/preprocessed_shuttles.pq
 
+shuttle_passenger_capacity_plot:
+  type: plotly.PlotlyDataSet
+  filepath: data/08_reporting/shuttle_passenger_capacity_plot.json
+  plotly_args:
+    type: bar
+    fig:
+      x: shuttle_type
+      y: passenger_capacity
+      text_auto: .2s
+      orientation: v
+    layout:
+      xaxis_title: Shuttles
+      yaxis_title: Average passenger capacity
+      title: Shuttle Average passenger capacity
+
 model_input_table:
   type: pandas.ParquetDataSet
   filepath: data/03_primary/model_input_table.pq

@@ -2,10 +2,16 @@
 This is a boilerplate pipeline 'data_science'
 generated using Kedro 0.18.3
 """
+import pandas as pd
+import plotly.express as px
 
 from kedro.pipeline import Pipeline, node, pipeline
 
 from .nodes import evaluate_model, split_data, train_model
+
+
+def compare_passenger_capacity(preprocessed_shuttles: pd.DataFrame):
+    return preprocessed_shuttles.groupby(["shuttle_type"]).mean().reset_index()
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -28,6 +34,11 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["regressor", "X_test", "y_test"],
                 outputs=None,
                 name="evaluate_model_node",
+            ),
+            node(
+                func=compare_passenger_capacity,
+                inputs="preprocessed_shuttles",
+                outputs="shuttle_passenger_capacity_plot",
             ),
         ]
     )
