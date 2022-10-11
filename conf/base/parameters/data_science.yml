@@ -4,30 +4,43 @@
 # Documentation for this file format can be found in "Parameters"
 # Link: https://kedro.readthedocs.io/en/0.18.3/kedro_project_setup/configuration.html#parameters
 
-model_options:
-  test_size: 0.2
-  random_state: 3
-  features:
-    - engines
-    - passenger_capacity
-    - crew
-    - d_check_complete
-    - moon_clearance_complete
-        
-    - iata_approved
-    - company_rating
-    - review_scores_rating
-    
-    - review_scores_comfort
-    - review_scores_amenities
-    - review_scores_trip
-    - review_scores_crew
-    - review_scores_location
-    - review_scores_price
-    - number_of_reviews
-    - reviews_per_month
-    - total_fleet_count
-    
+data_science:
+    active_modelling_pipeline:
+      model_options:
+        test_size: 0.2
+        random_state: 3
+        regressor: xgb.XGBRegressor
+        features:
+          - engines
+          - passenger_capacity
+          - crew
+          - d_check_complete
+          - moon_clearance_complete
+          - iata_approved
+          - company_rating
+          - review_scores_rating
+          - review_scores_comfort
+          - review_scores_amenities
+          - review_scores_trip
+          - review_scores_crew
+          - review_scores_location
+          - review_scores_price
+          - number_of_reviews
+          - reviews_per_month
+          - total_fleet_count
+
+    candidate_modelling_pipeline:
+      model_options:
+        test_size: 0.2
+        random_state: 8
+        regressor: xgb.XGBRegressor
+        features:
+          - engines
+          - passenger_capacity
+          - crew
+          - review_scores_rating
+
+
 # Features categóricas    
     
     ##- shuttle_location
@@ -57,6 +70,6 @@ model_options:
   
   #regressor: LinearRegression # Rˆ2 = 0.503 0.452 seconds.
   #regressor: RandomForestRegressor # Rˆ2 = 0.996 106.184 seconds.
-  regressor: xgb.XGBRegressor # Rˆ2 = 0.963 13.125 seg.
+  #regressor: xgb.XGBRegressor # Rˆ2 = 0.963 13.125 seg.
   #regressor: ltb.LGBMRegressor # Rˆ2 = 0.898 1.882 seconds.
   #regressor: CatBoostRegressor # Rˆ2 = 0.963 26.117 seg.

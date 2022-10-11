@@ -6,25 +6,48 @@
 companies:
   type: pandas.CSVDataSet
   filepath: data/01_raw/companies.csv
+  # more about layers in the Data Engineering Convention:
+  # https://kedro.readthedocs.io/en/stable/tutorial/visualise_pipeline.html#interact-with-data-engineering-convention
+  layer: raw
 
 reviews:
   type: pandas.CSVDataSet
   filepath: data/01_raw/reviews.csv
-  
+  layer: raw
+
 shuttles:
   type: pandas.ExcelDataSet
   filepath: data/01_raw/shuttles.xlsx
-  load_args:
-    engine: openpyxl # Use modern Excel engine, it is the default since Kedro 0.18.0
+  layer: raw
 
-preprocessed_companies:
+data_processing.preprocessed_companies:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/preprocessed_companies.pq
+  layer: intermediate
 
-preprocessed_shuttles:
+data_processing.preprocessed_shuttles:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/preprocessed_shuttles.pq
+  layer: intermediate
 
+model_input_table:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/model_input_table.pq
+  layer: primary
+
+data_science.active_modelling_pipeline.regressor:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/regressor_active.pickle
+  versioned: true
+  layer: models
+
+
+data_science.candidate_modelling_pipeline.regressor:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/regressor_candidate.pickle
+  versioned: true
+  layer: models
+  
 shuttle_passenger_capacity_plot:
   type: plotly.PlotlyDataSet
   filepath: data/08_reporting/shuttle_passenger_capacity_plot.json
@@ -39,12 +62,4 @@ shuttle_passenger_capacity_plot:
       xaxis_title: Shuttles
       yaxis_title: Average passenger capacity
       title: Shuttle Average passenger capacity
-
-model_input_table:
-  type: pandas.ParquetDataSet
-  filepath: data/03_primary/model_input_table.pq
-
-regressor:
-  type: pickle.PickleDataSet
-  filepath: data/06_models/regressor.pickle
-  versioned: true
+  layer: intermediate
